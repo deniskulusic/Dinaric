@@ -643,7 +643,6 @@ p {
 .button-header {
   border: 1px solid white;
   color: white;
-  margin-right: 64px;
   padding: 14px 34px;
   font-size: 18px;
 }
@@ -653,9 +652,20 @@ p {
 }
 
 .button-header-holder {
-  width: 30%;
-  display: flex;
   justify-content: end;
+}
+
+.logo {
+  height: 60px;
+  padding-right: 50px;
+}
+.logo img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: left center;
+     object-position: left center;
 }
 
 .han-menu-full {
@@ -717,7 +727,6 @@ p {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: "Clash Display", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -727,14 +736,95 @@ p {
   align-items: center;
   letter-spacing: 0.21em;
   transition: 0.5s;
+  position: relative;
+}
+
+/* overlaying bar */
+.search-overlay {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scaleX(0); /* collapsed */
+  transform-origin: right center; /* animate from right to left */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
   overflow: hidden;
+  transition: transform 0.35s ease, opacity 0.25s ease;
+  /* left and width will be set by JS */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+  border-left: 1px solid white;
 }
-.navbar .button-header {
-  margin-right: 50px;
+.search-overlay div {
+  margin-left: 24px;
 }
-.navbar img {
-  width: auto;
-  height: 28px;
+.search-overlay div img {
+  height: 32px;
+  width: 32px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  filter: brightness(100000%);
+}
+
+.search-overlay-input {
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  border: 0px;
+  background-color: transparent;
+  color: white;
+  outline: none;
+  font-size: 22px;
+}
+
+.search-overlay::-moz-placeholder {
+  opacity: 1;
+  color: white;
+}
+
+.search-overlay::placeholder {
+  opacity: 1;
+  color: white;
+}
+
+.inverted .search-overlay-input::-moz-placeholder {
+  opacity: 0.7;
+  color: black;
+}
+
+.inverted .search-overlay-input::placeholder {
+  opacity: 0.7;
+  color: black;
+}
+
+/* Adjust if navbar is inverted (dark text) */
+.inverted .search-overlay {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #15243C;
+  border-color: #15243C;
+}
+.inverted .search-overlay img {
+  filter: brightness(0%);
+}
+
+/* when search is open */
+.navbar.search-open .search-overlay {
+  transform: translateY(-50%) scaleX(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* optional: fade menu text slightly under overlay when search active */
+.navbar.search-open .menu-center {
+  opacity: 0;
+}
+
+.search-open .search-close {
+  opacity: 1;
+}
+.search-open .search-opened {
+  opacity: 0;
 }
 
 .menu-full {
@@ -869,11 +959,158 @@ p {
   color: white;
 }
 
+.lng-button {
+  padding: 18px 25px;
+  border: 1px solid white;
+  border-radius: 100px;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  transition: 0.3s;
+}
+.lng-button svg {
+  filter: brightness(100000%);
+  transition: 0.3s;
+}
+.lng-button span {
+  font-size: 17px;
+  color: white;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+
+.lng-button:hover {
+  background-color: rgba(255, 255, 255, 0.2196078431);
+}
+
+.lng-dropdown {
+  position: absolute;
+  right: 50px;
+  bottom: 0px;
+  transform: translateY(99%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0px;
+  max-height: 0px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.lng-dropdown-el {
+  border-radius: 26px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 8px 12px;
+  transition: 0.3s;
+}
+.lng-dropdown-el span {
+  color: white;
+  font-size: 15px;
+}
+
+.lng-dropdown-el-active {
+  background-color: rgba(255, 255, 255, 0.2196078431);
+}
+
+.lng-dropdown-el:hover {
+  background-color: rgba(255, 255, 255, 0.2196078431);
+}
+
+.flag {
+  border-radius: 9999px;
+  border: 1px solid white;
+  overflow: hidden;
+  height: 24px;
+  width: 24px;
+}
+.flag img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+  cursor: pointer;
+  position: relative;
+}
+.search img {
+  filter: brightness(10000%);
+  transition: 0.3s;
+}
+
+.search-close {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  opacity: 0;
+  transform: translateY(-50%);
+}
+
+.lng-active .lng-dropdown {
+  max-height: 300px;
+  padding: 12px;
+}
+.lng-active .lng-button svg {
+  rotate: 180deg;
+}
+
+.logo-black {
+  display: none;
+}
+
 .inverted .lng {
   color: rgb(55, 55, 55);
 }
+.inverted .logo-black {
+  display: block;
+}
+.inverted .logo-white {
+  display: none;
+}
+.inverted .search img {
+  filter: brightness(0%);
+}
 .inverted .lngactive {
   color: black;
+}
+.inverted .right-side-text {
+  color: black;
+}
+.inverted .lng-button {
+  border: 1px solid black;
+}
+.inverted .lng-button svg {
+  filter: brightness(0%);
+}
+.inverted .lng-button span {
+  color: black;
+}
+.inverted .lng-dropdown {
+  background-color: white;
+}
+.inverted .lng-dropdown-el span {
+  color: black;
+}
+.inverted .lng-dropdown-el-active {
+  background-color: rgba(0, 0, 0, 0.0941176471);
+}
+.inverted .lng-dropdown-el:hover {
+  background-color: rgba(0, 0, 0, 0.0941176471);
+}
+.inverted .flag {
+  border: 1px solid black;
+}
+.inverted .lng-button:hover {
+  background-color: rgba(0, 0, 0, 0.0941176471);
 }
 
 .lngo {
@@ -957,6 +1194,34 @@ p {
   transform: rotate(-45deg) translate(35px, 35px);
 }
 
+.menu-center {
+  align-items: center;
+  gap: 38px;
+  transition: 0.3s;
+}
+
+.right-side-text {
+  color: white;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.right-side-text:hover {
+  opacity: 0.8;
+}
+
+.han-menu-full {
+  display: none;
+}
+
+.menu-center {
+  display: flex;
+}
+
+.button-header-holder {
+  display: flex;
+}
+
 footer {
   background-color: #132b51;
   padding: 60px 0;
@@ -1001,7 +1266,7 @@ footer h3 {
   color: rgba(255, 255, 255, 0.747);
 }
 
-.line {
+.line-a {
   height: 2px;
   width: 28px;
   background-color: white;
@@ -1025,7 +1290,7 @@ footer h3 {
 .arrow-div:hover {
   transform: translateX(5px) translateY(-50%);
 }
-.arrow-div:hover .line {
+.arrow-div:hover .line-a {
   width: 0px;
 }
 
@@ -1181,6 +1446,9 @@ footer h3 {
   transition: 1s;
 }
 
+.menu-hidden {
+  overflow: hidden;
+}
 .menu-hidden .navbar {
   height: 0;
 }

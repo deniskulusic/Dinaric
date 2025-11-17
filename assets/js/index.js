@@ -188,8 +188,12 @@ requestAnimationFrame(raf);
   let PreFooter=document.querySelector('.pre-footer');
   let PreFooterElements=document.querySelectorAll('.image-group div');
   let PreFooterFromTop=window.pageYOffset + PreFooter.getBoundingClientRect().top;
+  let SD6=document.querySelector('.s-dinaric-6');
+  let SD6Elements=document.querySelectorAll('.s-dinaric-6-holder img');
+  let SD6FromTop=window.pageYOffset + SD6.getBoundingClientRect().top;
 window.addEventListener("resize", function () {
   PreFooterFromTop=window.pageYOffset + PreFooter.getBoundingClientRect().top;
+  SD6FromTop=window.pageYOffset + SD6.getBoundingClientRect().top;
   });
 
   
@@ -235,13 +239,50 @@ window.addEventListener("resize", function () {
         }, { duration: 1500, fill: "forwards" });
 
     }
+    if (SD6.getBoundingClientRect().top - 1.5*WindowHeight < 0 && SD6.getBoundingClientRect().top + SD6.clientHeight + 0.5*WindowHeight  > 0) {
+        SD6Elements[0].animate({
+          transform: "translateY(" + (-0.22 * (SD6FromTop - scroll)) + "px )"
+        }, { duration: 1000, fill: "forwards" });
+    }
   
   });
 
 
 
 
+if (!menu) return;
 
+    let threshold = window.innerHeight; // 100vh
+    const getY = () =>
+      (window.__lenis && typeof window.__lenis.scroll === 'number')
+        ? window.__lenis.scroll
+        : (window.scrollY || document.documentElement.scrollTop || 0);
+
+    const apply = () => {
+      const y = getY();
+      if (y >= threshold) {
+        menu.classList.add('inverted');
+      } else {
+        menu.classList.remove('inverted');
+      }
+    };
+
+    // Keep threshold in sync with viewport changes
+    const onResize = () => {
+      threshold = window.innerHeight;
+      apply();
+    };
+    window.addEventListener('resize', onResize, { passive: true });
+
+    // Hook into Lenis if available; otherwise fall back to native scroll
+    if (window.__lenis && typeof window.__lenis.on === 'function') {
+      window.__lenis.on('scroll', apply);
+    } else {
+      window.addEventListener('scroll', apply, { passive: true });
+    }
+
+    // Run once on load
+    apply();
 
 
 
@@ -756,7 +797,7 @@ function loadbar() {
       ovIn = id("overlay-in"), 
       ovInh = document.querySelector("#overlay-in h1");
       ovrl.classList.add("ovrl-loaded-start")
-      setTimeout(doneLoading, 5000);
+      setTimeout(doneLoading, 500);
   function doneLoading() {
 
     header.classList.add('header-loaded');
@@ -771,8 +812,84 @@ function loadbar() {
 
 }
 
+
+document.querySelector(".lng-button").addEventListener('click',function(){
+  document.querySelector(".button-header-holder").classList.toggle("lng-active")
+});
+
 document.addEventListener('DOMContentLoaded', loadbar, false);
 
+          const acordation=document.getElementsByClassName('faq');
+for(i=0;i<acordation.length;i++){
+  
+    acordation[i].addEventListener('click',function(){
+      var faqa=this.classList.contains("active");
+        var elems = document.querySelectorAll(".faq.active");
+        setTimeout(() => lenis.resize(), 550);
+        
+        
+[].forEach.call(elems, function(el) {
+    el.classList.remove("active");
+});
 
+if(faqa) {
+  this.classList.remove("active");
+        }
+        else{
+          this.classList.add("active");
+        }
+    })
+}
+
+     const navbar      = document.querySelector('.navbar');
+  const searchBtn   = document.querySelector('.search');
+  const overlay     = document.querySelector('.search-overlay');
+  const searchInput = document.querySelector('.search-overlay-input');
+  const logo        = document.querySelector('.logo');
+  const btnHolder   = document.querySelector('.button-header-holder');
+
+  if (!navbar || !searchBtn || !overlay || !logo || !btnHolder) return;
+
+  function positionSearchOverlay() {
+    const logoRect  = logo.getBoundingClientRect();
+    const btnRect   = btnHolder.getBoundingClientRect();
+    const navRect   = navbar.getBoundingClientRect();
+
+    // distance between logo's right edge and buttons' left edge
+    const width = btnRect.left - logoRect.right;
+
+    // overlay's left relative to navbar
+    const left = logoRect.right - navRect.left;
+
+    overlay.style.left  = left + 'px';
+    overlay.style.width = width + 'px';
+  }
+
+  // toggle on click
+  searchBtn.addEventListener('click', function () {
+    // recalc every time we open (in case layout changed)
+    positionSearchOverlay();
+
+    navbar.classList.toggle('search-open');
+
+    if (navbar.classList.contains('search-open')) {
+      // small timeout helps avoid focusing before CSS layout update
+      setTimeout(() => searchInput && searchInput.focus(), 10);
+    }
+  });
+
+  // close on ESC
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && navbar.classList.contains('search-open')) {
+      navbar.classList.remove('search-open');
+    }
+  });
+
+  // RECALC ON RESIZE
+  window.addEventListener('resize', function () {
+    if (navbar.classList.contains('search-open')) {
+      positionSearchOverlay();
+    }
+  });
 
 })();
