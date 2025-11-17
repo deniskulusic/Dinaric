@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="./assets/css/privacy.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">  <title>Index</title>
   <title>Index</title>
   <meta name="description" content="From-scratch Lenis smooth scroll setup in plain HTML/CSS/JS" />
 
@@ -15,7 +15,7 @@
 
 <body>
   <div class="menu-full inverted nav-loaded" >
-        <div class="navbar">
+        <div class="navbar maxw container">
             <div class="han-menu-full">
               <div class="han-menu">
                 <div class="han-burger"></div>
@@ -24,13 +24,51 @@
                 
             
             </div>
-            <img src="assets/img/ARGO.svg" onClick="location.href='Index.html'"class="flex" alt="">
-
+            <a href="" class="logo">
+                <img src="assets/img/logo-white-RGB.svg" alt="" class="logo-white">
+                <img src="assets/img/logo-black-RGB.svg" alt="" class="logo-black">
+            </a>
+            
+            <div class="menu-center">
+                <a href="" class="right-side-text">CHARTER</a>
+                <a href="" class="right-side-text">PURCHASE</a>
+                <a href="" class="right-side-text">SELL</a>
+                <a href="" class="right-side-text">BUILD</a>
+                <a href="" class="right-side-text">MANAGE</a>
+            </div>
+    <!-- SEARCH BAR OVERLAY -->
+    <div class="search-overlay">
+      <div>
+        <img src="assets/img/icon-search-big.svg" alt="">
+      </div>
+    <input type="text" class="search-overlay-input" placeholder="Search..." />
+  </div>
             <div class="button-header-holder">
-            <button class="main-button button-header">
-                        <a href="">BOOK NOW</a>
-                    </button>
-                    </div>
+              <div class="search">
+                <img src="assets/img/icon-search-big.svg" alt="" class="search-opened">
+                <img src="assets/img/icon-close-big.svg" alt="" class="search-close">
+              </div>
+            <button class="lng-button">
+              <span>ENG</span>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 9L12 15L18 9" stroke="#15243C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<div class="lng-dropdown">
+  <a href="" class="lng-dropdown-el">
+    <div class="flag">
+      <img src="assets/img/flag_cro.svg" alt="">
+    </div>
+    <span>Hrvatski</span>
+  </a>
+  <a href="" class="lng-dropdown-el lng-dropdown-el-active">
+    <div class="flag">
+      <img src="assets/img/flag_eng.svg" alt="">
+    </div>
+    <span>English</span>
+  </a>
+</div>
+            </button>
+            </div>
         </div>
         <div class="menu-div maxw container">
           <div class="menu-div-left">
@@ -163,27 +201,35 @@
       </div>
     </section>
     <footer>
+      <div class="footer-top">
+
+      
       <div class="maxw container grid">
-        <h3>Sign up to receive our news</h3>
-        <div class="sign-up">
-          <input type="text" placeholder="Enter your email">
-          <div class="arrow-div">
-            <div class="line"></div>
-            <div class="arrow"></div>
-            
-          </div>
+        <h2>Most viewed</h2>
+        <div class="footer-top-elements">
+          <a href class="">
+            <span>Luxury Yacht</span>
+          </a>
+          <a href class="">
+            <span>Luxury Yacht</span>
+          </a>
+          <a href class="">
+            <span>Luxury Yacht</span>
+          </a>
+          <a href class="">
+            <span>Luxury Yacht</span>
+          </a>
+          <a href class="">
+            <span>Luxury Yacht</span>
+          </a>
         </div>
-
-        <div class="footer-line">
-
-        </div>
+      </div>
       </div>
       <div class="maxw container grid">
         <div class="footer-element footer-logo-element">
             <div class="footer-logo">
-                <img src="assets/img/logo-white.png" alt="">
+                <img src="assets/img/logo-white-RGB.svg" alt="">
             </div>
-            <p>We are innovative, tech-focused dreamers with a desire to be pioneers in this space.</p>
             <div class="footer-socials">
                 <a href="">
                     <img src="assets/img/ShapeFb.svg" alt="">
@@ -200,28 +246,22 @@
             </div>
         </div>
         <div class="footer-element footer-text-element">
-          <div class="footer-title">Your Yourney</div>
           <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Yachts For Sale</a>
+          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Contact us</a>
+          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Brands</a>
           <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Contact us</a>
           <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Brands</a>
         </div>
         <div class="footer-element">
-          <div class="footer-title">Company</div>
+          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Yachts For Sale</a>
+          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Yachts For Sale</a>
+          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Yachts For Sale</a>
+          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Contact us</a>
+          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Yachts For Sale</a>
           <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Yachts For Sale</a>
           <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Contact us</a>
         </div>
-        <div class="footer-element">
-          <div class="footer-title">Resources</div>
-          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Yachts For Sale</a>
-          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Contact us</a>
-          <a href="" class="footer-text"><img src="assets/img/60947.png" alt="">Brands</a>
-        </div>
-        <div class="footer-element footer-element-last">
-          <a href="" class="footer-phone">+385 95 649 4435</a>
-          <a href="" class="footer-phone">+385 95 649 4435</a>
-          <a href="" class="footer-last">info@bcmarin.com</a>
-          <a href="" class="footer-last">B&C Marine  İstmarina Kartal / Istanbul</a>
-        </div>
+        
         <div class="footer-bottom">
         <a href="">© B&C Marine Yachts 2024 All rights reserved.</a>
         <div></div>

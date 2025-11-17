@@ -186,14 +186,15 @@ requestAnimationFrame(raf);
   const header = document.querySelector('.header');
   const nav = document.querySelector('.menu-full');
   const menu = document.querySelector('.menu-full');
-  const growSection = document.querySelectorAll('.section-2');
+  const growSection = document.querySelector('.section-2');
 
   
 
   // Parallax via [data-lenis-speed]
   const SCALE = 0.1;
   lenis.on('scroll', ({ scroll }) => {
-    if(scroll > WindowHeight - 100){
+    
+    if(scroll > 0.7*WindowHeight - 100){
       document.querySelector(".menu-full").classList.add("menu-filled")
     }
     else{
@@ -207,18 +208,17 @@ requestAnimationFrame(raf);
 
   let insideGrow = false;
 
-  growSection.forEach(section => {
-    const rectTop = section.offsetTop;
-    const rectBottom = rectTop + section.offsetHeight;
 
+    const rectTop = growSection.offsetTop;
+    const rectBottom = rectTop + growSection.offsetHeight;
     // Check if viewport top is inside the section boundaries
     if (viewportTop >= rectTop - 108 && viewportTop < rectBottom + 108) {
       insideGrow = true;
     }
-  });
 
   // Toggle the class
   if (insideGrow) {
+    console.log("yo")
     menu.classList.add('menu-hidden');
   } else {
     menu.classList.remove('menu-hidden');
@@ -929,7 +929,8 @@ document.querySelectorAll(".info-more .click-underline").forEach((btn) => {
       const totalWidth = cards.length * CARD_W + (cards.length - 1) * GAP;
       const viewW = viewport.clientWidth;
       const maxScroll = Math.max(0, totalWidth - viewW);
-      if (btnNext) btnNext.disabled = (Math.abs(offset) >= maxScroll - 0.5);
+      const maxAbs = Math.abs(offset);
+      if (btnNext) btnNext.disabled = (maxAbs >= maxScroll - 0.5);
     }
 
     function next() {
@@ -1094,9 +1095,10 @@ document.querySelectorAll(".info-more .click-underline").forEach((btn) => {
     }, { once: true });
   }
 
+  // BIG BACKGROUND: use SAME image as thumbs (.slide-picture)
   function swapLeftImageWipe(slideEl, leftHold) {
     if (!leftHold) return;
-    const pic = slideEl.querySelector('.slide-left-picture');
+    const pic = slideEl.querySelector('.slide-picture');
     const nextHTML = pic ? pic.innerHTML : '';
     if (!nextHTML) return;
 
@@ -1186,15 +1188,25 @@ document.querySelectorAll(".info-more .click-underline").forEach((btn) => {
         card.type = 'button';
         card.className = 'thumb-card';
 
+        // Thumbnail image (same as big background)
         const pic = slideEl.querySelector('.slide-picture picture, .slide-picture img');
         if (pic) {
           card.appendChild(pic.cloneNode(true));
         }
 
+        // Label from <p> text
+        const pEl = slideEl.querySelector('.slide-text p');
+        if (pEl) {
+          const label = document.createElement('div');
+          label.className = 'thumb-label';
+          label.textContent = pEl.textContent.trim();
+          card.appendChild(label);
+        }
+
         card.addEventListener('click', () => {
           if (isAnimating) return;
           startCooldown();
-          goTo(idx); // thumbs drive everything
+          goTo(idx);
         });
 
         thumbTrack.appendChild(card);
@@ -1274,7 +1286,48 @@ document.querySelectorAll(".info-more .click-underline").forEach((btn) => {
     }
   }
 
-  // Initialize all matching sections
-  document.querySelectorAll('.section-2, .section-6').forEach(initSection);
+  /* ============================
+     INIT-ONCE + TABS
+     ============================ */
+
+  function initSectionOnce(section) {
+    if (!section || section.dataset.initialized === 'true') return;
+    initSection(section);
+    section.dataset.initialized = 'true';
+  }
+
+  // Tab headers
+  const tabs = Array.from(document.querySelectorAll('.pre-section-2 .gallery-tab'));
+  const galleries = Array.from(document.querySelectorAll('.section-2'));
+
+  function showGalleryById(id) {
+    galleries.forEach(sec => {
+      if (sec.id === id) {
+        sec.classList.add('is-active');
+        initSectionOnce(sec);
+      } else {
+        sec.classList.remove('is-active');
+      }
+    });
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.dataset.gallery;
+      tabs.forEach(t => t.classList.remove('tab-active'));
+      tab.classList.add('tab-active');
+      showGalleryById(targetId);
+    });
+  });
+
+  // Initial: first tab / gallery active
+  if (tabs.length) {
+    const firstId = tabs[0].dataset.gallery;
+    tabs[0].classList.add('tab-active');
+    showGalleryById(firstId);
+  }
+
+  // If you also have .section-6 using the same pattern, init them once:
+  document.querySelectorAll('.section-6').forEach(initSectionOnce);
 
 })();

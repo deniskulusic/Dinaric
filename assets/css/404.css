@@ -198,6 +198,14 @@ body {
   position: absolute !important;
 }
 
+.inverted .lng-dropdown {
+  background-color: transparent;
+}
+
+.inverted .search-overlay {
+  background: none;
+}
+
 .han-burger, .han-burger::after, .han-burger::before {
   background-color: black !important;
 }
