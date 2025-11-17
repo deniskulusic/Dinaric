@@ -48,6 +48,10 @@ header video, header img {
   height: 100%;
 }
 
+.header-loaded video {
+  height: 100%;
+}
+
 .header-loaded .booking-div {
   opacity: 1;
   transform: translate3d(0, 0, 0);
@@ -671,6 +675,7 @@ header video, header img {
      object-fit: cover;
   -o-object-position: center top;
      object-position: center top;
+  opacity: 0.7;
 }
 
 /*Section Dinaric 1*/

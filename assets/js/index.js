@@ -175,7 +175,7 @@ requestAnimationFrame(raf);
 
 
 
-
+lenis.stop();
 
 
 
@@ -787,23 +787,37 @@ document.querySelector(".han-menu-full").addEventListener("click", function() {
   }
 });
  
-lenis.stop();
+
 function id(v) { return document.getElementById(v); }
+
+// ... (your other code) ...
 
 function loadbar() {
   let ovrl = id("overlay"),
-      prog = id("progress"),
-      stat = id("progstat"),
-      ovIn = id("overlay-in"), 
-      ovInh = document.querySelector("#overlay-in h1");
-      ovrl.classList.add("ovrl-loaded-start")
-      setTimeout(doneLoading, 500);
+    prog = id("progress"),
+    stat = id("progstat"),
+    ovIn = id("overlay-in"),
+    ovInh = document.querySelector("#overlay-in h1");
+
+  // ✅ ADD THIS LINE:
+  // This immediately hides the browser's scrollbar
+  document.body.classList.add("preloader-active");
+
+  ovrl.classList.add("ovrl-loaded-start")
+  setTimeout(doneLoading, 5000);
+
   function doneLoading() {
 
     header.classList.add('header-loaded');
     nav.classList.add('nav-loaded');
     ovrl.classList.add("ovrl-loaded")
-    lenis.start();
+    
+    lenis.start(); // This re-enables Lenis smooth scrolling
+
+    // ✅ ADD THIS LINE:
+    // This brings back the scrollbar now that loading is done
+    document.body.classList.remove("preloader-active");
+
     setTimeout(function () {
       ovrl.style.display = "none";
       ovrl.style.opacity = 0;
@@ -811,6 +825,10 @@ function loadbar() {
   }
 
 }
+
+document.addEventListener('DOMContentLoaded', loadbar, false);
+
+// ... (rest of your code) ...
 
 
 document.querySelector(".lng-button").addEventListener('click',function(){

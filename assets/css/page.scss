@@ -624,6 +624,7 @@ height: 506px;
         height: 100%;
         object-fit: cover;
         object-position: center top;
+        opacity: .7;
       }
       /* Fade edges (vertical example) */
   
@@ -1878,22 +1879,6 @@ transition: .3s;
     font-size: clamp(26px, 3.3vw, 40px);
   }
 
-  .section-2-maxw {
-    height: auto;
-  }
-
-  .section-2-right-up {
-    width: 45%;
-  }
-
-  .section-2-right-down {
-    width: 55%;
-  }
-
-  .section-2-right-up p {
-    width: 80%;
-  }
-
   .section-8-text {
     padding: 40px;
     width: 55%;
@@ -1915,11 +1900,6 @@ transition: .3s;
   header img,
   header video {
     height: 100%;
-  }
-
-  .header-text {
-    align-items: flex-start;
-    padding: 20vh 0 0;
   }
 
   .header-text h1 {
@@ -1972,64 +1952,7 @@ transition: .3s;
   }
 
   /* Section 2 – main gallery: stack instead of side-by-side */
-  .section-2-maxw {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .section-2-left {
-    position: relative;
-    width: 100%;
-    height: 45vh;
-  }
-
-  .section-2-left-holder,
-  .section-2-left picture,
-  .section-2-left img {
-    height: 100%;
-  }
-
-  .section-2-right {
-    padding: 32px 24px;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .section-2-right-up {
-    width: 100%;
-    order: 1;
-    align-items: flex-start;
-  }
-
-  .section-2-right-down {
-    width: 100%;
-    order: 2;
-    margin-top: 32px;
-  }
-
-  .section-2-right-down-left div h3,
-  .section-2-right-down-left div h4,
-  .section-2-right-down-left div p {
-    width: 100%;
-    font-size: clamp(28px, 4.5vw, 40px);
-  }
-
-  .section-2-right-up p {
-    width: 100%;
-  }
-
-  .section-2-right-down-right {
-    margin-top: 24px;
-  }
-
-  .section-2-right-down-right .thumb-card {
-    flex: 0 0 50%;
-    height: 22vh;
-  }
-
-  .buttons-slider {
-    margin-left: 0;
-  }
+ 
 
   /* Section 8 */
   .section-8-main {
@@ -2043,6 +1966,81 @@ transition: .3s;
   .section-8-text h4 {
     font-size: clamp(26px, 4vw, 34px);
   }
+
+
+  .section-2 {
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: white;
+  z-index: 3;
+  margin-bottom: calc(25vh + 128px);
+}
+.section-2-maxw {
+  display: flex;
+  height: 75vh;
+}
+.section-2-left {
+  flex-direction: column;
+  display: flex;
+}
+.section-2-right {
+  z-index: 2;
+  padding-left: 24px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  justify-content: space-between;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.section-2-right-up {
+  display: flex;
+  justify-content: end;
+  align-items: start;
+  position: relative;
+  flex-direction: column;
+  width: -moz-fit-content;
+  width: fit-content;
+  order: 2;
+  width:calc(100% - 24px);
+  transform: translateY(calc(100% + 70px));
+  position: absolute;
+  bottom: 0;
+}
+.buttons-slider {
+  margin-left: 0px;
+}
+.slider-btn span {
+  font-size: 22px;
+  color: black;
+}
+.slider-btn img {
+  filter: brightness(0%);
+
+}
+.section-2-right-down {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  -moz-column-gap: 30px;
+  column-gap: 30px;
+  width: 100%;
+  position: relative;
+  height: 100%;
+  padding-right: 24px;
+}
+.section-2-right-down-right .thumb-card {
+  height: 25vh;
+}
+.acordation{
+  padding-bottom: 100px;
+}
+
 }
 
 /* =====================================
@@ -2050,9 +2048,6 @@ transition: .3s;
 ===================================== */
 @media (max-width: 768px) {
   /* Header */
-  .header-text {
-    padding-top: 18vh;
-  }
 
   .header-text h3 {
     font-size: 14px;
@@ -2100,36 +2095,12 @@ transition: .3s;
     justify-content: flex-start;
   }
 
-  .section-2 {
-    padding-top: 6vh;
-    padding-bottom: 6vh;
-  }
 
-  .section-2-right-down-right .thumb-card {
-    flex: 0 0 70%;
-    height: 24vh;
-  }
-
-  .progress-bar-pr {
-    position: static;
-    margin-top: 24px;
-  }
-
-  .section-2-numbers {
-    justify-content: flex-start;
-    gap: 16px;
-  }
 
   .section-2-right-down-left div h3,
   .section-2-right-down-left div h4,
   .section-2-right-down-left div p {
     font-size: clamp(24px, 6vw, 32px);
-  }
-
-  .pre-section-2-tabs {
-    flex-wrap: wrap;
-    row-gap: 12px;
-    justify-content: flex-start;
   }
 
   /* Section 1 sliders */
@@ -2231,28 +2202,23 @@ transition: .3s;
     gap: 12px;
     align-items: flex-start;
   }
-}
+  .pre-section-2-tabs {
+    align-items: left
+    ;
+  flex-wrap: wrap;
+}}
 
 /* =====================================
    <= 576px (phones)
 ===================================== */
 @media (max-width: 576px) {
-  /* Container padding (if not already handled globally) */
-  .container {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .header-text {
-    padding-top: 16vh;
-  }
 
   .header-text h1 {
     font-size: clamp(26px, 9vw, 38px);
   }
 
   .header-text p {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .booking-div {
@@ -2262,7 +2228,7 @@ transition: .3s;
   }
 
   .section-dinaric-1 {
-    padding-top: 32px;
+    padding-top: 42px;
   }
 
   .section-dinaric-1 p,
@@ -2277,28 +2243,6 @@ transition: .3s;
   .acordation-text-1,
   .acordation-text-2 {
     grid-column: span 12;
-  }
-
-  .section-2-right {
-    padding: 24px 16px 32px;
-  }
-
-  .buttons-slider {
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  .slider-btn span {
-    font-size: 14px;
-  }
-
-  .thumb-label {
-    font-size: 16px;
-  }
-
-  .section-2-right-down-right .thumb-card {
-    flex: 0 0 80%;
-    height: 200px;
   }
 
   .section-2-right-down-left div h3,
@@ -2322,6 +2266,57 @@ transition: .3s;
   .acordation h2,
   .section-8 h2,
   .pre-footer h2 {
-    font-size: 18px;
+    font-size: 32px;
   }
+  .gallery-tab {
+  font-size: 24px;
+}
+.information-bottom h3 {
+  text-align: start;
+  font-size: 26px;
+}
+#overlay-in {
+  position: absolute;
+  left: 5%;
+  bottom: 0;
+  width: 90%;
+}
+.acordation h2 {
+  margin-bottom: 8px;
+}
+.progress-bar-p {
+  width: 100px;
+  margin-left: 0px;
+  margin-right: 12px;
+}
+.progress-bar-pr {
+  position: absolute;
+  left: 0;
+  bottom: 50px;
+}
+.section-2-right-down-left div h4 {
+  width: 100%;
+}
+ .slider-btn span {
+    font-size: 18px;
+    color: black;
+  }
+  .section-8 {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+    .footer-top-elements {
+    grid-column: span 12;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .section-2-right-down-right .thumb-card {
+  flex: 0 0 75%;
+}
+.section-2-right-up {
+    transform: translateY(calc(100% + 40px));
+}
+.section-2 {
+    margin-bottom: calc(25vh + 93px);
+}
 }

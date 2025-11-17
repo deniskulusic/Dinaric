@@ -196,6 +196,7 @@ requestAnimationFrame(raf);
     
     if(scroll > 0.7*WindowHeight - 100){
       document.querySelector(".menu-full").classList.add("menu-filled")
+      console.log(0.7*WindowHeight , scroll , WindowHeight)
     }
     else{
       document.querySelector(".menu-full").classList.remove("menu-filled")
@@ -786,7 +787,7 @@ function loadbar() {
       ovIn = id("overlay-in"), 
       ovInh = document.querySelector("#overlay-in h1");
       ovrl.classList.add("ovrl-loaded-start")
-      setTimeout(doneLoading, 500);
+      setTimeout(doneLoading, 5000);
   function doneLoading() {
 
     header.classList.add('header-loaded');

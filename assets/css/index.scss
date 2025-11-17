@@ -48,6 +48,9 @@ header video, header img {
 .header-loaded img {
   height: 100%;
 }
+.header-loaded video {
+  height: 100%;
+}
 .header-loaded .booking-div{
   opacity: 1;
   transform: translate3d(0,0,0);
@@ -657,6 +660,7 @@ height: 506px;
         height: 100%;
         object-fit: cover;
         object-position: center top;
+        opacity: .7;
       }
       /* Fade edges (vertical example) */
   
