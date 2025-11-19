@@ -1310,6 +1310,13 @@ footer h3 {
   section {
     padding-top: 100px;
   }
+  .first-section {
+    padding-top: 60px !important;
+  }
+  .grid {
+    -moz-column-gap: 20px;
+         column-gap: 20px;
+  }
   /* Menu – hide center links on tablet to rely on burger */
   .menu-center {
     display: none;
@@ -1398,5 +1405,6 @@ footer h3 {
   }
   footer {
     padding-bottom: 40px;
+    margin-top: 100px;
   }
 }/*# sourceMappingURL=general.css.map */

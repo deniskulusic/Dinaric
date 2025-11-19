@@ -1361,4 +1361,261 @@ header video, header img {
 .ovrl-loaded #overlay-in {
   transform: translateY(-25%);
   opacity: 0;
+}
+
+/* =========================================
+   RESPONSIVE QUERIES
+   ========================================= */
+/* --- Tablet / Small Desktop (Under 1024px) --- */
+@media (max-width: 1024px) {
+  /* Header Adjustments */
+  .header-text h1 {
+    font-size: 70px;
+  }
+  .header-2 .header-text p {
+    width: 100%;
+  }
+  /* Section 1 - Intro Text */
+  .section-dinaric-1 p,
+  .s-dinaric-2 p {
+    grid-column: span 12; /* Use full width instead of center columns */
+    font-size: 36px;
+    padding-top: 80px;
+  }
+  /* Section 1 - Yacht Cards (2 per row instead of 3) */
+  .section-dinaric-1-elements {
+    grid-column: span 6;
+  }
+  /* Section 3 - Yacht Types (2 per row) */
+  .s-dinaric-3-elements {
+    grid-column: span 6;
+  }
+  /* Section 5 - Why Choose Us */
+  .s-dinaric-5-element {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .s-dinaric-5-element-left,
+  .s-dinaric-5-element p {
+    grid-column: span 12;
+    width: 100%;
+  }
+  /* Section 7 - Get Inspired (Stack image and text) */
+  .s-dinaric-7-wrapper,
+  .s-dinaric-7-right {
+    grid-column: span 12;
+  }
+  .s-dinaric-7-right {
+    margin-top: 24px;
+    gap: 24px;
+  }
+  /* Section 8 - Reviews Slider */
+  /* Adjust card size from fixed pixel to responsive viewport width */
+  .s-dinaric-8 .card {
+    flex: 0 0 70vw;
+    width: 70vw;
+    height: 450px;
+  }
+  .slider-track article:first-of-type {
+    margin-left: 24px; /* Remove the calculation for huge screens */
+  }
+  .booking-div {
+    display: none;
+  }
+  .header-text h5 {
+    flex-wrap: wrap;
+  }
+  .section-dinaric-1 h2 {
+    margin-bottom: 0;
+  }
+  .section-dinaric-1 .grid {
+    row-gap: 36px;
+  }
+  .s-dinaric-4 h2 {
+    margin-bottom: 0;
+  }
+  .s-dinaric-4 .grid {
+    row-gap: 36px;
+  }
+  .s-dinaric-7 h2 {
+    margin-bottom: 0;
+  }
+  .s-dinaric-7 .grid {
+    row-gap: 36px;
+  }
+  .s-dinaric-7 .grid .grid {
+    row-gap: 0px;
+  }
+  .section-1 h2 {
+    margin-bottom: 36px;
+  }
+  .acordation h2 {
+    margin-bottom: 24px;
+  }
+  .s-dinaric-7-elements {
+    grid-column: span 12;
+    padding: 0;
+  }
+}
+/* --- Mobile Landscape / Tablets (Under 768px) --- */
+@media (max-width: 768px) {
+  /* Header */
+  .header-text h1 {
+    font-size: 50px;
+  }
+  .header-bottom {
+    display: none; /* Hide detailed stats on mobile if they clutter view */
+  }
+  .booking-div {
+    right: 24px;
+    bottom: 24px;
+    background-color: rgba(0, 0, 0, 0.6); /* Add background for contrast */
+  }
+  /* Make all grid items full width */
+  .section-dinaric-1-elements,
+  .s-dinaric-3-elements,
+  .s-dinaric-4-elements {
+    grid-column: span 12;
+  }
+  /* Section 1 Text */
+  .section-dinaric-1 p {
+    font-size: 28px;
+    padding-top: 60px;
+  }
+  /* Section 6 - Need Help */
+  .s-dinaric-6-holder-text {
+    right: auto;
+    left: 24px;
+    top: 64px;
+  }
+  .s-dinaric-6-holder {
+    padding-top: 100%; /* Make it taller on mobile to fit text */
+  }
+  /* FAQ Accordion */
+  .acordation-text-1,
+  .acordation-text-2 {
+    grid-column: span 12;
+    margin-top: 24px;
+  }
+  .faq-content {
+    justify-content: flex-start; /* Align left on mobile */
+  }
+  .faq-content p {
+    width: 100%;
+    font-size: 15px;
+  }
+  /* Slider */
+  .s-dinaric-8 .card {
+    flex: 0 0 85vw; /* Show mostly one card with a peek at the next */
+    width: 85vw;
+    height: 400px;
+  }
+  .s-dinaric-8 .article-text p {
+    font-size: 24px;
+  }
+  .s-dinaric-8 .article-text {
+    padding: 24px;
+  }
+  .s-dinaric-3-holder {
+    padding-top: 100%;
+    position: relative;
+  }
+  .s-dinaric-6-holder {
+    padding-top: 170%;
+  }
+}
+/* --- Mobile Portrait (Under 576px) --- */
+@media (max-width: 576px) {
+  .s-dinaric-3-holder {
+    padding-top: 120%;
+    position: relative;
+  }
+  .s-dinaric-3-holder-text {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    z-index: 3;
+    padding-right: 51px;
+  }
+  .s-dinaric-3-holder-text h3 {
+    text-align: start;
+    line-height: 1.2;
+  }
+  .s-dinaric-3-elements .d-arrow-div {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
+  /* Header */
+  .header-text h1 {
+    font-size: 42px;
+  }
+  header {
+    padding-bottom: 30px;
+    height: 100dvh; /* Ensure it handles mobile browser bars */
+  }
+  /* Reposition the 'Inquire Now' button to not block text */
+  .booking-div {
+    position: absolute;
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, 0) !important; /* Override JS transform if needed */
+    bottom: 100px;
+    width: -moz-max-content;
+    width: max-content;
+  }
+  /* Typography resizing */
+  h2 {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+  /* Section 5 */
+  .s-dinaric-5-element-left h3 {
+    font-size: 20px;
+  }
+  .s-dinaric-6-holder-text h2 {
+    font-size: 32px;
+  }
+  /* Slider Arrows */
+  /* Hide custom cursor or arrows if touch acts weird, or adjust position */
+  .buttons-slider-galery {
+    bottom: 10px;
+  }
+  /* Pre-Footer Images */
+  /* Prevent the wide overflow causing horizontal scroll on body */
+  .pre-footer {
+    overflow: hidden;
+  }
+  .pre-footer h2 {
+    margin-bottom: 0;
+  }
+  .image-group {
+    width: 200%; /* Allow it to be wider but contained */
+    left: -50%;
+    margin-top: 40px;
+  }
+  .image.--0, .image.--4 {
+    height: 40vw;
+    width: 30vw;
+  }
+  .image.--1, .image.--3 {
+    height: 64vw;
+    width: 40vw;
+    left: 8vw;
+    z-index: 2;
+  }
+  .image.--3 {
+    left: -8vw;
+  }
+  .image.--2 {
+    height: 90vw;
+    width: 70vw;
+  }
+  #overlay-in {
+    position: absolute;
+    left: 5%;
+    bottom: 0;
+    width: 90%;
+  }
 }/*# sourceMappingURL=index.css.map */

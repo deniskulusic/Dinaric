@@ -1273,6 +1273,12 @@ grid-column: 7/span 3;
   section{
     padding-top: 100px;
   }
+  .first-section {
+  padding-top: 60px !important;
+}
+.grid{
+  column-gap: 20px;
+}
 /* Menu – hide center links on tablet to rely on burger */
   .menu-center {
     display: none;
@@ -1366,5 +1372,6 @@ grid-column: 7/span 3;
 }
 footer{
   padding-bottom: 40px;
+  margin-top: 100px;
 }
 }
