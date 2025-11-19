@@ -694,7 +694,6 @@ header video, header img {
   line-height: 1.1;
   letter-spacing: 0%;
   text-align: center;
-  padding-top: 140px;
 }
 
 .section-dinaric-1-elements {
@@ -791,19 +790,20 @@ header video, header img {
 /*Section Dinaric 3*/
 .s-dinaric-3 {
   z-index: 1;
+  grid-column: span 12;
+  padding-top: 140px;
 }
 .s-dinaric-3 h2 {
   grid-column: span 12;
   text-transform: uppercase;
-  margin-bottom: 36px;
 }
 .s-dinaric-3 .maxw .s-dinaric-3-elements:last-of-type {
   margin-bottom: 0px;
 }
 
 .s-dinaric-3-elements {
-  grid-column: span 12;
-  margin-bottom: 32px;
+  grid-column: span 6;
+  margin-top: 40px;
 }
 .s-dinaric-3-elements img {
   transition: 0.5s;
@@ -823,7 +823,7 @@ header video, header img {
 }
 
 .s-dinaric-3-holder {
-  padding-top: 40%;
+  padding-top: 75%;
   position: relative;
 }
 
@@ -1430,7 +1430,7 @@ header video, header img {
     margin-bottom: 0;
   }
   .section-dinaric-1 .grid {
-    row-gap: 36px;
+    row-gap: 28px;
   }
   .s-dinaric-4 h2 {
     margin-bottom: 0;
@@ -1463,6 +1463,14 @@ header video, header img {
 }
 /* --- Mobile Landscape / Tablets (Under 768px) --- */
 @media (max-width: 768px) {
+  .s-dinaric-3 {
+    z-index: 1;
+    grid-column: span 12;
+    padding-top: 90px;
+  }
+  .s-dinaric-3-elements {
+    margin-top: 0;
+  }
   /* Header */
   .header-text h1 {
     font-size: 50px;
@@ -1484,7 +1492,7 @@ header video, header img {
   /* Section 1 Text */
   .section-dinaric-1 p {
     font-size: 28px;
-    padding-top: 60px;
+    padding-top: 0;
   }
   /* Section 6 - Need Help */
   .s-dinaric-6-holder-text {

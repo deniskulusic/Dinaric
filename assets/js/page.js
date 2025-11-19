@@ -1151,141 +1151,196 @@ document.querySelectorAll(".info-more .click-underline").forEach((btn) => {
 
 
   /* ============================
-     PER-SECTION INITIALIZER
-     ============================ */
-  function initSection(root) {
-    if (!root) return;
+   PER-SECTION INITIALIZER
+   ============================ */
+function initSection(root) {
+  if (!root) return;
 
-    const prevBtn    = root.querySelector('.slider-btn.prev');
-    const nextBtn    = root.querySelector('.slider-btn.next');
-    const leftBox    = root.querySelector('.section-2-right-down-left');
-    const rightDown  = root.querySelector('.section-2-right-down-right');
-    const leftHold   = root.querySelector('.section-2-left-holder');
-    const numWrap    = root.querySelector('.num-swap-wrap');
-    const numAllEl   = root.querySelector('.section-2-numbers-all');
-    const progressEl = root.querySelector('.progress-bar-p');
+  // -- Selectors --
+  const prevBtn     = root.querySelector('.slider-btn.prev');
+  const nextBtn     = root.querySelector('.slider-btn.next');
+  const leftBox     = root.querySelector('.section-2-right-down-left');
+  const rightDown   = root.querySelector('.section-2-right-down-right');
+  
+  const leftHold    = root.querySelector('.section-2-left-holder');
+  const leftWrapper = root.querySelector('.section-2-left'); 
+  const rightWrapper= root.querySelector('.section-2-right'); 
+  
+  const numWrap     = root.querySelector('.num-swap-wrap');
+  const numAllEl    = root.querySelector('.section-2-numbers-all');
+  const progressEl  = root.querySelector('.progress-bar-p');
 
-    const slideEls   = Array.from(root.querySelectorAll('.section-2-slides .slide'));
-    if (!slideEls.length) return;
+  const slideEls    = Array.from(root.querySelectorAll('.section-2-slides .slide'));
+  if (!slideEls.length) return;
 
-    if (numAllEl) numAllEl.textContent = String(slideEls.length).padStart(2, '0');
+  if (numAllEl) numAllEl.textContent = String(slideEls.length).padStart(2, '0');
 
-    if (leftHold && !leftHold.querySelector('.fit')) {
-      const fit = document.createElement('div');
-      fit.className = 'fit';
-      const currentLeftPic = leftHold.querySelector('picture') || leftHold.querySelector('img');
-      if (currentLeftPic) fit.appendChild(currentLeftPic);
-      leftHold.appendChild(fit);
-    }
+  // State needed for the click listeners
+  let currentIndex = 0;
 
-    // === RIGHT-SIDE THUMB SLIDER ===
-    const thumbViewport = rightDown ? rightDown.querySelector('.thumb-viewport') : null;
-    const thumbTrack    = rightDown ? rightDown.querySelector('.thumb-track') : null;
-    const thumbCards    = [];
+  // --- 1. PREPARE GALLERY DATA ---
+  const sectionImageUrls = slideEls.map(slide => {
+      const pic = slide.querySelector('.slide-picture img');
+      return pic ? pic.src : '';
+  }).filter(url => url !== '');
 
-    if (thumbViewport && thumbTrack && slideEls.length) {
-      slideEls.forEach((slideEl, idx) => {
-        const card = document.createElement('button');
-        card.type = 'button';
-        card.className = 'thumb-card';
+  // Helper: Calculate "Previous" Image Index (with wrap-around)
+  const getVisualIndex = () => {
+      const total = slideEls.length;
+      // If current is 0, (0 - 1 + 5) % 5 = 4. 
+      return (currentIndex - 1 + total) % total;
+  };
 
-        // Thumbnail image (same as big background)
-        const pic = slideEl.querySelector('.slide-picture picture, .slide-picture img');
-        if (pic) {
-          card.appendChild(pic.cloneNode(true));
-        }
+  // Helper to trigger gallery
+  const triggerGallery = () => {
+      if (typeof window.openGlobalGallery === 'function') {
+          // Open gallery to the visual (previous) image
+          window.openGlobalGallery(sectionImageUrls, getVisualIndex());
+      }
+  };
 
-        // Label from <p> text
-        const pEl = slideEl.querySelector('.slide-text p');
-        if (pEl) {
-          const label = document.createElement('div');
-          label.className = 'thumb-label';
-          label.textContent = pEl.textContent.trim();
-          card.appendChild(label);
-        }
-
-        card.addEventListener('click', () => {
-          if (isAnimating) return;
-          startCooldown();
-          goTo(idx);
-        });
-
-        thumbTrack.appendChild(card);
-        thumbCards.push(card);
-      });
-    }
-
-    function updateThumbPosition(index) {
-      if (!thumbViewport || !thumbTrack || !thumbCards.length) return;
-
-      const activeCard = thumbCards[index];
-      thumbCards.forEach((c, i) => c.classList.toggle('is-active', i === index));
-
-      const trackWidth    = thumbTrack.scrollWidth;
-      const viewportWidth = thumbViewport.clientWidth;
-
-      let targetX = -activeCard.offsetLeft;
-      const maxScroll = Math.max(0, trackWidth - viewportWidth);
-      if (targetX < -maxScroll) targetX = -maxScroll;
-      if (targetX > 0) targetX = 0;
-
-      thumbTrack.style.transform = `translateX(${targetX}px)`;
-    }
-
-    let isAnimating = false;
-    const COOLDOWN_MS = 1500;
-    function startCooldown() {
-      isAnimating = true;
-      setTimeout(() => { isAnimating = false; }, COOLDOWN_MS);
-    }
-
-    let currentIndex = 0;
-
-    function goTo(idx) {
-      if (!slideEls.length) return;
-
-      if (idx < 0) idx = slideEls.length - 1;
-      if (idx >= slideEls.length) idx = 0;
-      currentIndex = idx;
-
-      const slideEl = slideEls[currentIndex];
-      const numStr  = slideEl.dataset.number || String(currentIndex + 1).padStart(2, '0');
-
-      // LEFT: text + big image
-      swapLeftTextPerLine(leftBox, slideEl);
-      swapLeftImageWipe(slideEl, leftHold);
-
-      // NUMBERS + PROGRESS
-      swapNumber(numWrap, numStr);
-      setProgressBar(progressEl, currentIndex, slideEls.length);
-
-      // RIGHT: move thumbs so this one is flush left
-      updateThumbPosition(currentIndex);
-    }
-
-    // initial sync
-    goTo(0);
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        if (isAnimating) return;
-        startCooldown();
-        goTo(currentIndex + 1);
-      });
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        if (isAnimating) return;
-        startCooldown();
-        goTo(currentIndex - 1);
-      });
-    }
-
-    if (thumbViewport) {
-      window.addEventListener('resize', () => updateThumbPosition(currentIndex));
-    }
+  // --- 2. LEFT SIDE CLICK ---
+  if (leftWrapper) {
+      leftWrapper.style.cursor = 'zoom-in';
+      leftWrapper.addEventListener('click', triggerGallery);
   }
+
+  // --- 3. RIGHT SIDE CLICK (With Exclusion) ---
+  if (rightWrapper) {
+      rightWrapper.style.cursor = 'zoom-in';
+      const rightUp = rightWrapper.querySelector('.section-2-right-up');
+      if (rightUp) rightUp.style.cursor = 'default';
+
+      rightWrapper.addEventListener('click', (e) => {
+          if (e.target.closest('.section-2-right-up')) return;
+          if (e.target.closest('a')) return;
+          triggerGallery();
+      });
+  }
+
+  // --- Standard Slider Setup ---
+
+  if (leftHold && !leftHold.querySelector('.fit')) {
+    const fit = document.createElement('div');
+    fit.className = 'fit';
+    const currentLeftPic = leftHold.querySelector('picture') || leftHold.querySelector('img');
+    if (currentLeftPic) fit.appendChild(currentLeftPic);
+    leftHold.appendChild(fit);
+  }
+
+  // === RIGHT-SIDE THUMB SLIDER ===
+  const thumbViewport = rightDown ? rightDown.querySelector('.thumb-viewport') : null;
+  const thumbTrack    = rightDown ? rightDown.querySelector('.thumb-track') : null;
+  const thumbCards    = [];
+
+  if (thumbViewport && thumbTrack && slideEls.length) {
+    slideEls.forEach((slideEl, idx) => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'thumb-card';
+      card.style.cursor = 'pointer'; 
+
+      const pic = slideEl.querySelector('.slide-picture picture, .slide-picture img');
+      if (pic) card.appendChild(pic.cloneNode(true));
+
+      const pEl = slideEl.querySelector('.slide-text p');
+      if (pEl) {
+        const label = document.createElement('div');
+        label.className = 'thumb-label';
+        label.textContent = pEl.textContent.trim();
+        card.appendChild(label);
+      }
+
+      card.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        if (isAnimating) return;
+        startCooldown();
+        goTo(idx);
+      });
+
+      thumbTrack.appendChild(card);
+      thumbCards.push(card);
+    });
+  }
+
+  function updateThumbPosition(index) {
+    if (!thumbViewport || !thumbTrack || !thumbCards.length) return;
+
+    const activeCard = thumbCards[index];
+    thumbCards.forEach((c, i) => c.classList.toggle('is-active', i === index));
+
+    const trackWidth    = thumbTrack.scrollWidth;
+    const viewportWidth = thumbViewport.clientWidth;
+
+    let targetX = -activeCard.offsetLeft;
+    const maxScroll = Math.max(0, trackWidth - viewportWidth);
+    if (targetX < -maxScroll) targetX = -maxScroll;
+    if (targetX > 0) targetX = 0;
+
+    thumbTrack.style.transform = `translateX(${targetX}px)`;
+  }
+
+  let isAnimating = false;
+  const COOLDOWN_MS = 1500;
+  function startCooldown() {
+    isAnimating = true;
+    setTimeout(() => { isAnimating = false; }, COOLDOWN_MS);
+  }
+
+  function goTo(idx) {
+    if (!slideEls.length) return;
+    if (idx < 0) idx = slideEls.length - 1;
+    if (idx >= slideEls.length) idx = 0;
+    
+    // 1. Update State
+    currentIndex = idx;
+
+    // 2. Calculate Visual Index (PREVIOUS)
+    const total = slideEls.length;
+    const visualIndex = (currentIndex - 1 + total) % total;
+
+    const slideElCurrent = slideEls[currentIndex];
+    const slideElVisual  = slideEls[visualIndex];
+
+    const numStr  = slideElCurrent.dataset.number || String(currentIndex + 1).padStart(2, '0');
+
+    // TEXT: Current Index
+    swapLeftTextPerLine(leftBox, slideElCurrent);
+
+    // IMAGE: Visual (Previous) Index
+    swapLeftImageWipe(slideElVisual, leftHold);
+
+    // NUMBERS / THUMBS: Current Index
+    swapNumber(numWrap, numStr);
+    setProgressBar(progressEl, currentIndex, slideEls.length);
+    updateThumbPosition(currentIndex);
+  }
+
+  // initial sync
+  goTo(0);
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isAnimating) return;
+      startCooldown();
+      goTo(currentIndex + 1);
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isAnimating) return;
+      startCooldown();
+      goTo(currentIndex - 1);
+    });
+  }
+
+  if (thumbViewport) {
+    window.addEventListener('resize', () => updateThumbPosition(currentIndex));
+  }
+}
 
   /* ============================
      INIT-ONCE + TABS
@@ -1330,5 +1385,106 @@ document.querySelectorAll(".info-more .click-underline").forEach((btn) => {
 
   // If you also have .section-6 using the same pattern, init them once:
   document.querySelectorAll('.section-6').forEach(initSectionOnce);
+
+/* ================= GALLERY LOGIC (DYNAMIC REUSABLE) ================= */
+(function() {
+    // DOM elements
+    const gallery = document.querySelector('.fullscreen-gallery');
+    // Safety check if gallery HTML exists
+    if (!gallery) return; 
+
+    const galleryTrack = gallery.querySelector('.gallery-track');
+    const closeBtn = gallery.querySelector('.gallery-close-btn');
+    const prevBtn = gallery.querySelector('.gallery-prev');
+    const nextBtn = gallery.querySelector('.gallery-next');
+    const galleryCounter = gallery.querySelector('.gallery-counter');
+
+    // State
+    let currentIndex = -1;
+    let totalSlides = 0;
+    const TRANSITION_DURATION = 700;
+
+    // 1. Build slides based on passed Array of URLs
+    function buildGallerySlides(imgUrls) {
+        galleryTrack.innerHTML = ''; // Clear existing content
+        totalSlides = imgUrls.length;
+
+        imgUrls.forEach(url => {
+            const slide = document.createElement('div');
+            slide.classList.add('gallery-slide');
+            // Create image
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = 'Gallery image';
+            // Append
+            slide.appendChild(img);
+            galleryTrack.appendChild(slide);
+        });
+    }
+
+    // 2. Update the gallery view
+    function updateGallery(immediate = false) {
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+
+        const offset = currentIndex * -100; // vw unit
+        galleryTrack.style.transitionDuration = immediate ? '0ms' : `${TRANSITION_DURATION}ms`;
+        galleryTrack.style.transform = `translateX(${offset}vw)`;
+
+        // Update buttons and counter
+        if(prevBtn) prevBtn.disabled = currentIndex === 0;
+        if(nextBtn) nextBtn.disabled = currentIndex === totalSlides - 1;
+        if(galleryCounter) galleryCounter.textContent = `${currentIndex + 1}/${totalSlides}`;
+    }
+
+    // 3. Close Function
+    function closeGallery() {
+        gallery.classList.remove('is-open');
+        gallery.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    // 4. Navigation
+    function navigate(direction) {
+        let newIndex = currentIndex + direction;
+        if (newIndex >= 0 && newIndex < totalSlides) {
+            currentIndex = newIndex;
+            updateGallery(false);
+        }
+    }
+
+    // --- Event Listeners ---
+    if(closeBtn) closeBtn.addEventListener('click', closeGallery);
+    if(prevBtn) prevBtn.addEventListener('click', () => navigate(-1));
+    if(nextBtn) nextBtn.addEventListener('click', () => navigate(1));
+
+    document.addEventListener('keydown', (e) => {
+        if (!gallery.classList.contains('is-open')) return;
+        if (e.key === 'Escape') closeGallery();
+        else if (e.key === 'ArrowLeft') navigate(-1);
+        else if (e.key === 'ArrowRight') navigate(1);
+    });
+
+    // --- EXPOSE TO WINDOW ---
+    // This allows Section 2 to call this function
+    window.openGlobalGallery = function(imageUrls, startIndex) {
+        if (!imageUrls || !imageUrls.length) return;
+
+        // 1. Build the track with the specific images from the section
+        buildGallerySlides(imageUrls);
+
+        // 2. Set index
+        currentIndex = startIndex;
+
+        // 3. Open UI
+        gallery.classList.add('is-open');
+        gallery.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        // 4. Position immediately
+        updateGallery(true);
+    };
+})();
+
 
 })();

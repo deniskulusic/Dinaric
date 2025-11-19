@@ -14,8 +14,8 @@
 }
 
 header {
-  height: 80dvh;
-  padding-bottom: 100px;
+  height: 85dvh;
+  padding-bottom: 70px;
   position: relative;
   z-index: 1;
   background-color: transparent;
@@ -228,6 +228,7 @@ header video, header img {
   line-height: 1.8;
   text-transform: uppercase;
   font-weight: 300;
+  font-family: "Satoshi", sans-serif;
 }
 
 .header-loaded img {
@@ -650,12 +651,12 @@ header video, header img {
   z-index: 2;
   position: relative;
   background-color: transparent;
-  padding-top: 60px;
+  padding-top: 90px;
 }
 .section-dinaric-1 h2 {
   grid-column: span 12;
   text-transform: uppercase;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 .section-dinaric-1 p {
   color: black;
@@ -677,7 +678,7 @@ header video, header img {
 .section-dinaric-1 .info-more {
   grid-column: span 12;
   border-top: 0px;
-  justify-content: start;
+  justify-content: center;
   padding-top: 0;
   margin-top: 32px;
 }
@@ -837,7 +838,7 @@ header video, header img {
   color: #000;
   font-weight: 500;
   text-align: start;
-  font-size: 18px;
+  font-size: 24px;
   padding-right: 32px;
 }
 
@@ -1343,6 +1344,7 @@ footer {
   padding-left: 50px;
   width: 100%;
   display: flex;
+  align-items: end;
 }
 
 .section-2-right-up {
@@ -1355,6 +1357,8 @@ footer {
   width: fit-content;
   order: 2;
   width: 40%;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .section-2-right-up p {
@@ -1421,6 +1425,7 @@ footer {
   column-gap: 30px;
   width: 60%;
   position: relative;
+  height: 100%;
 }
 
 .section-2-right-down-left {
@@ -1905,17 +1910,6 @@ h4 .word-token {
 /* =====================================
    GLOBAL RESPONSIVE TWEAKS
 ===================================== */
-/* Fluid headings */
-.header-text h1,
-.section-dinaric-1 p,
-.s-dinaric-2 p,
-.section-2-right-down-left h3,
-.section-2-right-down-left h4,
-.section-2-right-down-left p,
-.section-8-text h4 {
-  font-size: clamp(28px, 5vw, 60px);
-}
-
 /* General paragraph width on small screens */
 .header-text p {
   width: 100%;
@@ -1959,7 +1953,7 @@ h4 .word-token {
   header {
     height: auto;
     min-height: 80vh;
-    padding-bottom: 60px;
+    padding-bottom: 30px;
     align-items: flex-end;
   }
   header img,
@@ -1987,7 +1981,7 @@ h4 .word-token {
   }
   /* Section DINARIC 1 */
   .section-dinaric-1 {
-    padding-top: 40px;
+    padding-top: 60px;
   }
   .section-dinaric-1 p {
     grid-column: span 12;
@@ -2095,7 +2089,7 @@ h4 .word-token {
 @media (max-width: 768px) {
   /* Header */
   .header-text h3 {
-    font-size: 14px;
+    font-size: 16px;
   }
   .header-text h1 {
     font-size: clamp(30px, 8vw, 44px);
@@ -2107,6 +2101,9 @@ h4 .word-token {
   /* Section DINARIC 1 */
   .section-dinaric-1 p {
     font-size: clamp(20px, 4.5vw, 26px);
+  }
+  .section-dinaric-1 h2 {
+    margin-bottom: 18px;
   }
   .section-dinaric-1-elements {
     grid-column: span 12;
@@ -2129,6 +2126,9 @@ h4 .word-token {
   }
   .info-more {
     justify-content: flex-start;
+  }
+  .acordation-grid h5 {
+    font-size: 18px;
   }
   .section-2-right-down-left div h3,
   .section-2-right-down-left div h4,
@@ -2228,7 +2228,7 @@ h4 .word-token {
 ===================================== */
 @media (max-width: 576px) {
   .header-text h1 {
-    font-size: clamp(26px, 9vw, 38px);
+    font-size: clamp(32px, 14vw, 38px);
   }
   .header-text p {
     font-size: 15px;
@@ -2238,12 +2238,11 @@ h4 .word-token {
     bottom: 16px;
     padding: 10px 16px;
   }
-  .section-dinaric-1 {
-    padding-top: 42px;
+  .section-dinaric-1 p, .s-dinaric-2 p {
+    font-size: clamp(26px, 4.5vw, 24px);
   }
-  .section-dinaric-1 p,
-  .s-dinaric-2 p {
-    font-size: clamp(18px, 4.5vw, 24px);
+  .section-dinaric-1 .info-more {
+    margin-top: 16px;
   }
   .acordation {
     padding-bottom: 80px;
@@ -2270,7 +2269,7 @@ h4 .word-token {
   .acordation h2,
   .section-8 h2,
   .pre-footer h2 {
-    font-size: 32px;
+    font-size: 29px;
   }
   .gallery-tab {
     font-size: 24px;
@@ -2317,4 +2316,219 @@ h4 .word-token {
   .section-2 {
     margin-bottom: calc(25vh + 93px);
   }
+}
+/*Section 1 Galery*/
+.opens-gallery {
+  position: relative;
+}
+
+.section-1-galery .card {
+  position: relative;
+  flex: 0 0 80vw;
+  width: 80vw;
+  height: 45vw;
+  max-height: 910px;
+  max-width: 1500px;
+}
+.section-1-galery .slider-track {
+  gap: 48px;
+}
+.section-1-galery .slider-track {
+  transition: 1500ms cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.section-1-galery h2 {
+  grid-column: span 12;
+  grid-column: span 12;
+  margin-bottom: 60px;
+}
+
+/* NEW STYLE: Slide Counter */
+.gallery-counter-div {
+  position: absolute;
+  top: 50px; /* Requested vertical position */
+  left: 50%;
+  transform: translateX(-50%); /* Centered horizontally */
+  z-index: 9002; /* Needs to be above the main dark background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gallery-counter-div span {
+  font-size: 16px;
+  color: white;
+  font-weight: 400;
+}
+
+.gallery-counter {
+  color: white;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 6px;
+}
+
+.gallery-close-btn {
+  /* ... existing styles ... */
+}
+
+/* Fullscreen Gallery Styles */
+.fullscreen-gallery {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 0vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  overflow: hidden;
+  z-index: 9000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Initial state: Hidden and moved off-screen (bottom) */
+  transition: 700ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition-delay: 0.2s;
+}
+
+.fullscreen-gallery.is-open {
+  height: 100dvh;
+}
+
+.gallery-content {
+  /* Set dimensions for the visible area */
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Hide anything outside the viewport */
+}
+
+.gallery-image-viewport {
+  /* The main window through which the slides are viewed */
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.gallery-track {
+  /* This element holds ALL the slides in a row */
+  height: 100%;
+  display: flex; /* Arranges slides horizontally */
+  will-change: transform;
+  transition: transform 0.4s ease-out; /* Smooth slide transition */
+}
+
+.gallery-slide {
+  /* Each slide takes up the full viewport width */
+  width: 100vw;
+  height: 100%;
+  flex-shrink: 0; /* Important: prevents slides from shrinking */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery-slide img {
+  /* Image sizing within the slide */
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: cover;
+}
+
+.gallery-image-wrapper {
+  /* NEW WIDTH: Holds both images side-by-side */
+  width: 200%;
+  height: 100%;
+  display: flex; /* Arranges the two image elements horizontally */
+  transition: transform 0.4s ease-out; /* Slide transition */
+  transform: translateX(0); /* Default position: Image 1 visible */
+}
+
+/* --- Image Elements --- */
+.gallery-image-wrapper img {
+  /* Each image takes up exactly half the wrapper's width (the full viewport width) */
+  width: 50%;
+  height: 100%;
+  flex-shrink: 0; /* Prevents images from shrinking */
+  -o-object-fit: cover;
+     object-fit: cover;
+  /* Resetting opacity, as the wrapper handles the transition */
+  opacity: 1;
+}
+
+/* ---------------------------------------------------- */
+/* --- TRANSITION STATES (Managed by JS) --- */
+/* ---------------------------------------------------- */
+/* State 1: Default/Current view (Image 1 is visible) */
+.gallery-image-wrapper.state-1 {
+  transform: translateX(0%);
+}
+
+/* State 2: Transition view (Image 2 slides in over Image 1) */
+.gallery-image-wrapper.state-2 {
+  transform: translateX(-50%); /* Moves the wrapper left by one image width */
+}
+
+/* Media query to bring buttons closer on smaller screens */
+@media (max-width: 1024px) {
+  .gallery-prev {
+    left: 10px;
+  }
+  .gallery-next {
+    right: 10px;
+  }
+}
+.gallery-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* --- Progress Bar Styles (NEW) --- */
+.progress-bar {
+  grid-column: 1/span 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+  color: #9ca3af; /* Gray text */
+}
+
+@media (max-width: 768px) {
+  .progress-bar {
+    grid-column: 1/-1; /* Full width on mobile */
+    justify-content: center;
+  }
+}
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-track {
+  width: 225px; /* Fixed width as requested */
+  height: 1px; /* Increased height for visibility */
+  background-color: rgba(0, 0, 0, 0.1);
+  position: relative;
+  border-radius: 1px;
+}
+
+.progress-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: black;
+  transition: width 0.3s ease-out;
+  border-radius: 1px;
+}
+
+.progress-total, .progress-count {
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  text-align: left;
 }/*# sourceMappingURL=page.css.map */

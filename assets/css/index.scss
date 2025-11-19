@@ -680,7 +680,6 @@ height: 506px;
     line-height: 1.1;
     letter-spacing: 0%;
     text-align: center;
-    padding-top: 140px;
   }
   
   
@@ -779,10 +778,11 @@ svg{
 /*Section Dinaric 3*/
 .s-dinaric-3{
   z-index: 1;
+  grid-column: span 12;
+  padding-top: 140px;
   h2{
     grid-column: span 12;
     text-transform: uppercase;
-    margin-bottom: 36px;
   }
   .maxw{
     .s-dinaric-3-elements:last-of-type{ 
@@ -792,8 +792,8 @@ svg{
 
 }
 .s-dinaric-3-elements{
-  grid-column: span 12;
-  margin-bottom: 32px;
+  grid-column: span 6;
+  margin-top: 40px;
   img{
     transition: .5s;
   }
@@ -813,7 +813,7 @@ svg{
 }
 }
 .s-dinaric-3-holder{
-  padding-top: 40%;
+  padding-top: 75%;
   position: relative;
   
   
@@ -1094,6 +1094,7 @@ grid-column: span 6;
 
   /*Acordation*/
 .acordation{
+
   h2{
     grid-column: span 12;
     text-transform: uppercase;
@@ -1439,7 +1440,7 @@ article{
       margin-bottom: 0;
     }
     .grid{
-      row-gap: 36px;
+      row-gap: 28px;
     }
   }
   .s-dinaric-4{
@@ -1479,7 +1480,14 @@ article{
 
 /* --- Mobile Landscape / Tablets (Under 768px) --- */
 @media (max-width: 768px) {
-  
+  .s-dinaric-3{
+  z-index: 1;
+  grid-column: span 12;
+  padding-top: 90px;
+  }
+  .s-dinaric-3-elements {
+  margin-top: 0;
+}
   /* Header */
   .header-text h1 {
     font-size: 50px;
@@ -1503,7 +1511,7 @@ article{
   /* Section 1 Text */
   .section-dinaric-1 p {
     font-size: 28px;
-    padding-top: 60px;
+    padding-top: 0;
   }
 
   /* Section 6 - Need Help */
