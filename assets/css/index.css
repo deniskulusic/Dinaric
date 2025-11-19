@@ -1336,9 +1336,9 @@ header video, header img {
 
 #overlay-in {
   position: absolute;
-  left: 20%;
+  left: 0;
   bottom: 0;
-  width: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   transition: 1000ms cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -1614,11 +1614,5 @@ header video, header img {
   .image.--2 {
     height: 90vw;
     width: 70vw;
-  }
-  #overlay-in {
-    position: absolute;
-    left: 5%;
-    bottom: 0;
-    width: 90%;
   }
 }/*# sourceMappingURL=index.css.map */

@@ -804,7 +804,7 @@ function loadbar() {
   document.body.classList.add("preloader-active");
 
   ovrl.classList.add("ovrl-loaded-start")
-  setTimeout(doneLoading, 5000);
+  setTimeout(doneLoading, 2800);
 
   function doneLoading() {
 

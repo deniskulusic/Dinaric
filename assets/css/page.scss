@@ -1014,9 +1014,9 @@ article{
 
 #overlay-in {
   position: absolute;
-  left: 20%;
+  left: 0;
   bottom: 0;
-  width: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   transition:1000ms cubic-bezier(.215,.61,.355,1);;
@@ -2275,12 +2275,7 @@ transition: .3s;
   text-align: start;
   font-size: 26px;
 }
-#overlay-in {
-  position: absolute;
-  left: 5%;
-  bottom: 0;
-  width: 90%;
-}
+
 .acordation h2 {
   margin-bottom: 8px;
 }
